@@ -7,7 +7,7 @@ public class BlockGenerator : MonoBehaviour
     private GameObject lastBlock; // Последний сгенерированный блок
     public GameObject player; // Игрок
     private bool isGeneratingNextBlock = false; // Флаг для препятсвия многократной генерации нового блока
-
+    //private bool new_level = false;
     void Start()
     {
         // Генерация первого блока при старте
@@ -20,19 +20,34 @@ public class BlockGenerator : MonoBehaviour
         if (currentBlock != null && !isGeneratingNextBlock)
         {
             Transform finishDoor = currentBlock.transform.Find("FinishDoor");
+            
             if (finishDoor != null)
             {
                 float distanceToFinishDoor = Vector3.Distance(player.transform.position, finishDoor.position);
 
                 // Если игрок близко к финишной двери, генерируем следующий блок
-                if (distanceToFinishDoor < 10f)
+                if (distanceToFinishDoor < 5f)
                 {
-                    DeleteBlock();
                     isGeneratingNextBlock = true;
+                    //new_level = true;
+                    DeleteBlock();                    
+                    DiactivateCollider(finishDoor);
                     GenerateNextBlock(finishDoor);
                 }
             }
         }
+        /*Transform startDoor = currentBlock.transform.Find("StartDoor");
+        if (startDoor != null)
+        {
+            float distanceToStarthDoor = Vector3.Distance(player.transform.position, startDoor.position);
+            if (distanceToStarthDoor > 5f && new_level)
+            {
+                Debug.Log("fjfjfff");
+                ActivateCollider(startDoor);
+                new_level = false;
+            }
+        } */
+
     }
 
     void DeleteBlock()
@@ -42,9 +57,7 @@ public class BlockGenerator : MonoBehaviour
         {
             Destroy(lastBlock);
             lastBlock = null;
-        }
-            
-        
+        }                   
     }
 
     // Генерация первого блока
@@ -52,10 +65,11 @@ public class BlockGenerator : MonoBehaviour
     {
         currentBlock = Instantiate(blocks[0]);
         Transform startDoor = currentBlock.transform.Find("StartDoor");
+        Transform finishDoor = currentBlock.transform.Find("FinishDoor");
         if (startDoor != null)
         {
             // Перемещаем игрока к стартовой двери
-            player.transform.position = startDoor.position + Vector3.up * 1.5f; // Сдвиг вверх, чтобы игрок стоял над полом
+            player.transform.position = startDoor.position - startDoor.forward * 1.5f;
         }
     }
 
@@ -67,6 +81,7 @@ public class BlockGenerator : MonoBehaviour
         GameObject nextBlock = Instantiate(blocks[randomIndex]);
 
         Transform nextStartDoor = nextBlock.transform.Find("StartDoor");
+        //Transform nextFinishDoor = nextBlock.transform.Find("FinishDoor");
         if (nextStartDoor != null)
         {
             // Поворот нового блока
@@ -74,23 +89,33 @@ public class BlockGenerator : MonoBehaviour
 
             Vector3 doorOffset = nextStartDoor.position - nextBlock.transform.position; // Смещение стартовой двери относительно нового блока
             nextBlock.transform.position = finishDoor.position - doorOffset; // Позиция блока в нужное место
-                                  
-            // Блокируем стартовую дверь нового блока
-            BoxCollider startDoorCollider = finishDoor.GetComponent<BoxCollider>();
-            if (startDoorCollider != null)
-            {
-                startDoorCollider.enabled = true;
-                Debug.Log("Коллайдер стартовой двери отключен.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Стартовая дверь не найдена в новом блоке!");
-        }       
-
+            DiactivateCollider(nextStartDoor);
+           
+            
+        }      
         // Обновление глобальных переменных
         lastBlock = currentBlock;
         currentBlock = nextBlock;
         isGeneratingNextBlock = false;
+    }
+    
+    // Включение коллайдера двери
+    void ActivateCollider(Transform door)
+    {
+        BoxCollider DoorCollider = door.GetComponent<BoxCollider>();
+        if (DoorCollider != null)
+        {
+            DoorCollider.enabled = true;
+        }
+    }
+
+    // Выключение коллайдера двери
+    void DiactivateCollider(Transform door)
+    {
+        BoxCollider DoorCollider = door.GetComponent<BoxCollider>();
+        if (DoorCollider != null)
+        {
+            DoorCollider.enabled = false;
+        }
     }
 }
