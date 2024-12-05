@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;  // Скорость движения
-    public float lookSpeed = 2f;  // Скорость поворота камеры
+    public float moveSpeed = 5f;
+    // Скорость движения
+    [Range(1, 30)]
+    public float lookSpeed = 5f;  // Скорость поворота камеры
     public Transform playerCamera; // Ссылка на камеру игрока
 
     private CharacterController characterController;
@@ -32,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
     void LookAround()
     {
         // Вращаем игрока по оси Y
+        float rotY = Input.GetAxis("Mouse X") * lookSpeed;
+        transform.Rotate(0, rotY, 0);
 
+
+        rotationX -= Input.GetAxis("Mouse Y") * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -80f, 80f);
+        playerCamera.localRotation = Quaternion.Euler(rotationX, 0, 0);
     }
 }
