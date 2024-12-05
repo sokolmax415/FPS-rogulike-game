@@ -154,6 +154,7 @@ MonoBehaviour:
   blocks:
   - {fileID: 572586618292609556, guid: d09bbec090b3400429f95ff5c83ce518, type: 3}
   - {fileID: 572586618292609556, guid: 3fff707843ba82b4c892998c43411cb2, type: 3}
+  - {fileID: 572586618292609556, guid: f40d43a145da0bc44a40af4965593217, type: 3}
   player: {fileID: 1441439536}
 --- !u!4 &592620266
 Transform:
@@ -370,7 +371,6 @@ GameObject:
   - component: {fileID: 1441439538}
   - component: {fileID: 1441439543}
   - component: {fileID: 1441439544}
-  - component: {fileID: 1441439545}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -512,27 +512,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 90
   m_CollisionDetection: 0
---- !u!65 &1441439545
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441439536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.99999994, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
