@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour
 {
-    public GameObject[] blocks; // Массив префабов блоков
-    private GameObject currentBlock; // Текущий активный блок
-    private GameObject lastBlock; // Последний сгенерированный блок
-    public GameObject player; // Игрок
-    private bool isGeneratingNextBlock = false; // Флаг для препятсвия многократной генерации нового блока
+    public GameObject[] blocks; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private GameObject currentBlock; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    private GameObject lastBlock; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    public GameObject player; // пїЅпїЅпїЅпїЅпїЅ
+    private bool isGeneratingNextBlock = false; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     //private bool new_level = false;
     void Start()
     {
-        // Генерация первого блока при старте
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         GenerateInitialBlock();
     }
 
     void Update()
     {
-        // Проверка на игрока рядом с блоком
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (currentBlock != null && !isGeneratingNextBlock)
         {
             Transform finishDoor = currentBlock.transform.Find("FinishDoor");
@@ -25,7 +25,7 @@ public class BlockGenerator : MonoBehaviour
             {
                 float distanceToFinishDoor = Vector3.Distance(player.transform.position, finishDoor.position);
 
-                // Если игрок близко к финишной двери, генерируем следующий блок
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 if (distanceToFinishDoor < 5f)
                 {
                     isGeneratingNextBlock = true;
@@ -60,7 +60,7 @@ public class BlockGenerator : MonoBehaviour
         }                   
     }
 
-    // Генерация первого блока
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     void GenerateInitialBlock()
     {
         currentBlock = Instantiate(blocks[0]);
@@ -68,15 +68,16 @@ public class BlockGenerator : MonoBehaviour
         Transform finishDoor = currentBlock.transform.Find("FinishDoor");
         if (startDoor != null)
         {
-            // Перемещаем игрока к стартовой двери
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             player.transform.position = startDoor.position - startDoor.forward * 1.5f;
+            player.transform.position = new Vector3(player.transform.position.x, startDoor.position.y + 1.4f, player.transform.position.z);
         }
     }
 
-    // Генерация следующего блока
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public void GenerateNextBlock(Transform finishDoor)
     {
-        // Выбор случайного блока
+        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         int randomIndex = Random.Range(0, blocks.Length);
         GameObject nextBlock = Instantiate(blocks[randomIndex]);
 
@@ -84,22 +85,22 @@ public class BlockGenerator : MonoBehaviour
         //Transform nextFinishDoor = nextBlock.transform.Find("FinishDoor");
         if (nextStartDoor != null)
         {
-            // Поворот нового блока
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             nextBlock.transform.rotation = finishDoor.rotation;
 
-            Vector3 doorOffset = nextStartDoor.position - nextBlock.transform.position; // Смещение стартовой двери относительно нового блока
-            nextBlock.transform.position = finishDoor.position - doorOffset; // Позиция блока в нужное место
+            Vector3 doorOffset = nextStartDoor.position - nextBlock.transform.position; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+            nextBlock.transform.position = finishDoor.position - doorOffset; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
             DiactivateCollider(nextStartDoor);
            
             
         }      
-        // Обновление глобальных переменных
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         lastBlock = currentBlock;
         currentBlock = nextBlock;
         isGeneratingNextBlock = false;
     }
     
-    // Включение коллайдера двери
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     void ActivateCollider(Transform door)
     {
         BoxCollider DoorCollider = door.GetComponent<BoxCollider>();
@@ -109,7 +110,7 @@ public class BlockGenerator : MonoBehaviour
         }
     }
 
-    // Выключение коллайдера двери
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     void DiactivateCollider(Transform door)
     {
         BoxCollider DoorCollider = door.GetComponent<BoxCollider>();
