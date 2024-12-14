@@ -4,7 +4,7 @@ public class Shooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public float bulletSpeed = 80f;
+    public float bulletSpeed = 60f;
     public bool isAutomatic = false; // Режим стрельбы
 
     void Update()
