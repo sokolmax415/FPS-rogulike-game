@@ -70,8 +70,7 @@ public class BlockGenerator : MonoBehaviour
         {
             // Ïåðåìåùàåì èãðîêà ê ñòàðòîâîé äâåðè
             player.transform.position = startDoor.position - startDoor.forward * 1.5f;
-            player.transform.position = new Vector3(player.transform.position.x, startDoor.position.y + 1.4f, player.transform.position.z);
-            player.transform.position = new Vector3(player.transform.position.x, startDoor.position.y + 1.4f, player.transform.position.z);
+            player.transform.position = new Vector3(player.transform.position.x, startDoor.position.y + 1f, player.transform.position.z);
         }
     }
 

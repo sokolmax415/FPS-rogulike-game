@@ -28,7 +28,9 @@ public class PlayerMovement : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical") * moveSpeed;
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        move.y = -9.8f * Time.deltaTime;
         characterController.Move(move * Time.deltaTime);
+
     }
 
     void LookAround()
