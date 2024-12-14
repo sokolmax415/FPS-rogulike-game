@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Shooting : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class Shooting : MonoBehaviour
         {
             isAutomatic = !isAutomatic; // Переключаем режим стрельбы
             Debug.Log("Режим стрельбы: " + (isAutomatic ? "Автоматический" : "Одиночный"));
+        }
+        // Открытие меню при нажатии на escape
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }
 
