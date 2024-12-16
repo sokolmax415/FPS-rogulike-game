@@ -2,21 +2,18 @@ using UnityEngine;
 
 public class BlockGenerator : MonoBehaviour
 {
-    public GameObject[] blocks; // Ìàññèâ ïðåôàáîâ áëîêîâ
-    private GameObject currentBlock; // Òåêóùèé àêòèâíûé áëîê
-    private GameObject lastBlock; // Ïîñëåäíèé ñãåíåðèðîâàííûé áëîê
-    public GameObject player; // Èãðîê
-    private bool isGeneratingNextBlock = false; // Ôëàã äëÿ ïðåïÿòñâèÿ ìíîãîêðàòíîé ãåíåðàöèè íîâîãî áëîêà
-    //private bool new_level = false;
+    public GameObject[] blocks;
+    private GameObject currentBlock;
+    private GameObject lastBlock;
+    public GameObject player;
+    private bool isGeneratingNextBlock = false;
     void Start()
     {
-        // Ãåíåðàöèÿ ïåðâîãî áëîêà ïðè ñòàðòå
         GenerateInitialBlock();
     }
 
     void Update()
     {
-        // Ïðîâåðêà íà èãðîêà ðÿäîì ñ áëîêîì
         if (currentBlock != null && !isGeneratingNextBlock)
         {
             Transform finishDoor = currentBlock.transform.Find("FinishDoor");
@@ -25,7 +22,6 @@ public class BlockGenerator : MonoBehaviour
             {
                 float distanceToFinishDoor = Vector3.Distance(player.transform.position, finishDoor.position);
 
-                // Åñëè èãðîê áëèçêî ê ôèíèøíîé äâåðè, ãåíåðèðóåì ñëåäóþùèé áëîê
                 if (distanceToFinishDoor < 5f)
                 {
                     isGeneratingNextBlock = true;
@@ -60,7 +56,6 @@ public class BlockGenerator : MonoBehaviour
         }                   
     }
 
-    // Ãåíåðàöèÿ ïåðâîãî áëîêà
     void GenerateInitialBlock()
     {
         currentBlock = Instantiate(blocks[0]);
@@ -68,16 +63,13 @@ public class BlockGenerator : MonoBehaviour
         Transform finishDoor = currentBlock.transform.Find("FinishDoor");
         if (startDoor != null)
         {
-            // Ïåðåìåùàåì èãðîêà ê ñòàðòîâîé äâåðè
             player.transform.position = startDoor.position - startDoor.forward * 1.5f;
             player.transform.position = new Vector3(player.transform.position.x, startDoor.position.y + 1f, player.transform.position.z);
         }
     }
 
-    // Ãåíåðàöèÿ ñëåäóþùåãî áëîêà
     public void GenerateNextBlock(Transform finishDoor)
     {
-        // Âûáîð ñëó÷àéíîãî áëîêà
         int randomIndex = Random.Range(0, blocks.Length);
         GameObject nextBlock = Instantiate(blocks[randomIndex]);
 
@@ -85,22 +77,19 @@ public class BlockGenerator : MonoBehaviour
         //Transform nextFinishDoor = nextBlock.transform.Find("FinishDoor");
         if (nextStartDoor != null)
         {
-            // Ïîâîðîò íîâîãî áëîêà
             nextBlock.transform.rotation = finishDoor.rotation;
 
-            Vector3 doorOffset = nextStartDoor.position - nextBlock.transform.position; // Ñìåùåíèå ñòàðòîâîé äâåðè îòíîñèòåëüíî íîâîãî áëîêà
-            nextBlock.transform.position = finishDoor.position - doorOffset; // Ïîçèöèÿ áëîêà â íóæíîå ìåñòî
+            Vector3 doorOffset = nextStartDoor.position - nextBlock.transform.position;
+            nextBlock.transform.position = finishDoor.position - doorOffset;
             DiactivateCollider(nextStartDoor);
            
             
-        }      
-        // Îáíîâëåíèå ãëîáàëüíûõ ïåðåìåííûõ
+        }
         lastBlock = currentBlock;
         currentBlock = nextBlock;
         isGeneratingNextBlock = false;
     }
     
-    // Âêëþ÷åíèå êîëëàéäåðà äâåðè
     void ActivateCollider(Transform door)
     {
         BoxCollider DoorCollider = door.GetComponent<BoxCollider>();
@@ -110,7 +99,6 @@ public class BlockGenerator : MonoBehaviour
         }
     }
 
-    // Âûêëþ÷åíèå êîëëàéäåðà äâåðè
     void DiactivateCollider(Transform door)
     {
         BoxCollider DoorCollider = door.GetComponent<BoxCollider>();

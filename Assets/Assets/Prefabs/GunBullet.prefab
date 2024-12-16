@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8125803565836012380}
   m_Layer: 0
   m_Name: GunBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5754.833, y: 3987.709, z: 6755.44}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.11}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac72427e3f828d045a21f46bb4be398e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!54 &-8125803565836012380
 Rigidbody:
   m_ObjectHideFlags: 0

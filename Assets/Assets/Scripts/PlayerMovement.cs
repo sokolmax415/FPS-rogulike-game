@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    // �������� ��������
     [Range(1, 30)]
-    public float lookSpeed = 5f;  // �������� �������� ������
-    public Transform playerCamera; // ������ �� ������ ������
+    public float lookSpeed = 5f;
+    public Transform playerCamera;
 
     private CharacterController characterController;
     private float rotationX = 0f;
@@ -35,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     void LookAround()
     {
-        // ������� ������ �� �6298�� Y
         float rotY = Input.GetAxis("Mouse X") * lookSpeed;
         transform.Rotate(0, rotY, 0);
 

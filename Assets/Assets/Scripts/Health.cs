@@ -21,7 +21,6 @@ public class Health : MonoBehaviour
         }
     }
 
-    // Метод, вызываемый при смерти объекта
     private void Die()
     {
         Debug.Log("Player Kaput!");
