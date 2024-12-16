@@ -5,9 +5,12 @@ public class Health : MonoBehaviour
     public float maxHealth = 100;
     private float currentHealth;
 
+    private Animator animator;
+
     void Start()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float damage)
@@ -24,6 +27,9 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player Kaput!");
-        Destroy(gameObject);
+        animator.SetBool("Death", true);
+        
     }
+
+    
 }
