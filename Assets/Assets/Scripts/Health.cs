@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        maxHealth = currentHealth;
+        //maxHealth = currentHealth;
 
         if (currentHealth <= 0)
         {
@@ -24,5 +24,6 @@ public class Health : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player Kaput!");
+        Destroy(gameObject);
     }
 }

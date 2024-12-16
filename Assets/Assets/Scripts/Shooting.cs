@@ -7,6 +7,7 @@ public class Shooting : MonoBehaviour
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 60f;
     public bool isAutomatic = false;
+    public int weaponDamage;
 
     void Update()
     {
@@ -40,7 +41,9 @@ public class Shooting : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        
+        Bullet bul = bulletPrefab.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
+
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.velocity = bulletSpawnPoint.forward * bulletSpeed;
     }
